@@ -12,6 +12,10 @@ COMMENT
 touch task2/file1.txt task2/file2.txt task2/file3.txt
 echo "Three files created in task2 folder"
 
+#we will create anther folder names as task2_temp 
+mkdir -p task2_temp
+echo "Created new directory names task2_temp"
+
 #now we will copy files and paste them in the new folder 
 #we used the /* to copy all the files from folder task2
 cp task2/* task2_temp/
