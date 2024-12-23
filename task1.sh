@@ -29,6 +29,7 @@ searching() {
         if [ -f "$item" ]; then
             if [ "$(basename "$item")" == "$file" ]; then
                 echo "File is found: $item"
+                finding=true
                 exit 0 #we ended the loop when file is found
             else 
                 echo "Not found in folder: $folder"  
