@@ -43,5 +43,5 @@ searching() {
 
 searching "$folder"
 if ! $finding; then
-    echo "Serch is complete but file is not found."
+    echo "Search is complete but file is not found."
 fi
