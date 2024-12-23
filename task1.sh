@@ -1,3 +1,5 @@
+#!/bin/bash
+
 <<"COMMENT"
 Write a script to search a file in a given folder.
 ~$ ./task1.sh <search_file> <from_folder>
@@ -5,8 +7,6 @@ For example:
 ./task1.sh file1 folder1/
 Should output searching every single occurrence of file1 by using depth first search.
 COMMENT
-
-#!/bin/bash
 
 #The first thing we will do is check whether the user passed the file and folder name in the args
 #The -z variable tells us if argument is empty string or not 
@@ -16,9 +16,9 @@ if [ -z "$1" ] || [ -z "$2" ]; then
     exit 1
 fi
 
-#we can declare as much arguments as we like here
 file="$1"  
 folder="$2"
+finding=false
 
 searching() {
     #local keyword can only be used inside a function, it makes variable name have a visible scope 
@@ -29,11 +29,11 @@ searching() {
         if [ -f "$item" ]; then
             if [ "$(basename "$item")" == "$file" ]; then
                 echo "File is found: $item"
-                exit 1 #we ended the loop when file is found
+                exit 0 #we ended the loop when file is found
             else 
                 echo "Not found in folder: $folder"  
             fi
-        elif [ -d "$item" ]; then
+        elif [ -d "$item" ] && [ "$finding" == "false" ]; then
             #here we are checking the sub directories
             searching "$item"
         fi
@@ -41,10 +41,6 @@ searching() {
 }
 
 searching "$folder"
-
-
-
-
-
-
-
+if ! $finding; then
+    echo "Serch is complete but file is not found."
+fi
